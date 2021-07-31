@@ -1,0 +1,104 @@
+﻿
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body, h1, h2, h3, h4, h5, h6 {
+            font-family: "Lato", sans-serif
+        }
+
+        img {
+            opacity: 0.6;
+            filter: alpha(opacity=60);
+        }
+
+        .w3-bar, h1, button {
+            font-family: "Montserrat", sans-serif
+        }
+
+        .fa-envira, .fa-handshake-o {
+            font-size: 200px
+        }
+    </style>
+</head>
+<body>
+
+    <header class="w3-container  w3-center" style="        padding: 128px 16px;
+        background-image: url('https://image.shutterstock.com/image-photo/healthy-food-clean-eating-selection-260nw-722718097.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        opacity: 1;
+        filter: alpha(opacity=100);">
+        <h1 class="w3-margin w3-jumbo w3-text-white"><font face="Tahoma">GASTRONOT</font></h1>
+        <p class="w3-xlarge w3-text-white">
+            <i>No more complexity, simplified healthy living</i>
+        </p>
+        <button class="w3-button w3-light-grey w3-padding-large w3-large w3-margin-top">Try Now</button>
+    </header>
+
+    <!-- First Grid -->
+    <div class="w3-row-padding w3-padding-64 w3-container">
+        <div class="w3-content">
+            <div class="w3-twothird">
+                <h1></h1>
+                <h1 class="w3-padding-32">About Us</h1>
+
+                <p class="w3-text-grey">
+                    Helping people everywhere lead healthier lives through behavior change.
+                    Gastronot is a mission-driven technology company dedicated to building a healthier world. Our core products combine technology with human empathy, to empower personal change, and these principles are reflected throughout our company.
+
+
+                    We are an award-winning workplace.
+                    Letting our values and principles lead the way has helped make Gastronot one of Inc.’s Best Places to Work and Fortune’s Best Workplaces in Technology, among other accolades.
+
+                </p>
+            </div>
+
+            <div class="w3-third w3-center">
+                <i class="fa fa-envira
+ w3-padding-64 w3-text-orange"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Second Grid -->
+    <div class="w3-row-padding w3-light-grey w3-padding-64 w3-container">
+        <div class="w3-content">
+            <div class="w3-third w3-center">
+                <i class="fa fa-handshake-o w3-padding-64 w3-text-orange w3-margin-right"></i>
+            </div>
+
+            <div class="w3-twothird">
+                <h1>Why Gastronot</h1>
+                <p class="w3-text-grey">
+                    Tracking users’ diet, recommending meal choices, and allowing them to compare alternatives also not forbidding cheat meals but recommending people healthier options would be main functions of Gastronot app.
+                </p>
+
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+<script>
+    // Used to toggle the menu on small screens when clicking on the menu button
+    function myFunction()
+    {
+        var x = document.getElementById("navDemo");
+        if (x.className.indexOf("w3-show") == -1)
+        {
+            x.className += " w3-show";
+        } else
+        {
+            x.className = x.className.replace(" w3-show", "");
+        }
+    }
+</script>

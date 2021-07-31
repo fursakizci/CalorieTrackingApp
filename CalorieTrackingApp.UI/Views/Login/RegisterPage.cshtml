@@ -1,0 +1,229 @@
+﻿@model CalorieTrackingApp.UI.Models.PersonModel
+@{
+    Layout = null;
+}
+
+@*<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <div class="container">
+        <form asp-action="RegisterPage" asp-controller="Login" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Name</label>
+                <div class="col-md-10">
+                    <input class="form-control" asp-for="Name" value="@Model.Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Surname</label>
+                <div class="col-md-10">
+                    <input class="form-control" asp-for="Surname" value="@Model.Surname" />
+                    <span asp-validation-for="Surname" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Username</label>
+                <div class="col-md-10">
+                    <input autocomplete="off" class="form-control" asp-for="Username" value="@Model.Username" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Height</label>
+                <div class="col-md-10">
+                    <input class="form-control" asp-for="Height" value="@Model.Height" />
+                    <span asp-validation-for="Height" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Weight</label>
+                <div class="col-md-10">
+                    <input class="form-control" asp-for="Weight" value="@Model.Weight" />
+                    <span asp-validation-for="Weight" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Age</label>
+                <div class="col-md-10">
+                    <input class="form-control" asp-for="Age" value="@Model.Age" />
+                    <span asp-validation-for="Age" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Sex</label>
+                <div class="col-md-10">
+                    <input class="form-control" asp-for="Sex" value="@Model.Sex" />
+                    <span asp-validation-for="Sex" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Email</label>
+                <div class="col-md-10">
+                    <input class="form-control" asp-for="Email" value="@Model.Email" type="email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2 col-form-label">Password</label>
+                <div class="col-md-10">
+                    <input autocomplete="off" class="form-control" asp-for="Password" value="@Model.Password" type="password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-10">
+                    <button type="submit" class="btn btn-primary">Register User</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>*@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gastronot-Sign Up</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel='stylesheet' href='https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.0-rc3/angular-material.css'>
+    @*<link rel='stylesheet' href='https://localhost:8080/docs.css'>*@
+    <link rel="stylesheet" href="~/css/style.css">
+
+</head>
+<body style="background-image: linear-gradient(to right, #2f204b, #365e84); background-size: 100% 100%;">
+    <!-- partial:index.partial.html -->
+    <div ng-controller="DemoCtrl" ng-cloak="" class="md-inline-form" ng-app="MyApp" layout="column" layout-sm="row" layout-align="center center" layout-align-sm="start start" layout-fill>
+        <md-content id="SignupContent" class="md-whiteframe-10dp" flex-sm>
+            <md-toolbar flex id="materialToolbar">
+                <div class="md-toolbar-tools"> <span flex=""></span> <span class="md-headline" align="center">Sign Up</span> <span flex=""></span> </div>
+            </md-toolbar>
+            <div layout-padding="">
+                <div></div>
+                <form name="userForm" asp-action="RegisterPage" asp-controller="Login" method="post" ng-submit="user.submit(userForm.$valid)" enctype="multipart/form-data">
+                    <input type="hidden" name="action" value="signup" />
+                    <div layout="row" layout-sm="column">
+                        <md-input-container flex-gt-sm="">
+                            <label>First name</label>
+                            <input ng-model="user.first_name" name="Name" required type="text" ng-pattern="/^[a-zA-Z'. -]+$/" placeholder="Your First Name">
+                            <div ng-if="userForm.first_name.$dirty" ng-messages="userForm.first_name.$error" role="alert">
+                                <div ng-message="required" class="my-message">First Name is Required.<br>First Name and Last Name should be 20 characters.</div>
+                                <div ng-message="required" class="my-message">First Name and Last Name should be 20 characters.</div>
+                                <div ng-message="pattern" class="my-message">Enter correct First Name.</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex-gt-sm="">
+                            <label>Last Name</label>
+                            <input ng-model="user.last_name" name="Surname" required type="text" ng-pattern="/^[a-zA-Z'. -]+$/" placeholder="Your Last Name">
+                            <div ng-if="userForm.last_name.$dirty" ng-messages="userForm.last_name.$error" role="alert">
+                                <div ng-message="required" class="my-message">Last Name is Required.</div>
+                                <div ng-message="pattern" class="my-message">Enter correct Last Name.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" layout-sm="column">
+                        <p style="font-size: 12px; margin-left: 3px; margin-top: 18px;">Sex: </p>
+                        <input type="hidden" name="sex" value="{{user.gender}}" />
+                        <md-radio-group style="margin: 12px 0 19px;" ng-model="user.gender" required>
+                            <md-radio-button value="Male" class="md-primary">Male</md-radio-button>
+                            <md-radio-button value="Female">Female</md-radio-button>
+                        </md-radio-group>
+                        <md-input-container flex-gt-sm="60">
+                            <label>Age</label>
+                            <input required type="number" step="any" name="age" min="13" max="100" placeholder="20" />
+                            <div ng-if="userForm.age.$dirty" ng-messages="userForm.age.$error" role="alert" multiple>
+                                <div ng-message="required">Age is Required.</div>
+                                <div ng-message="min">Only Above 13 years Old are allowed.</div>
+                                <div ng-message="max">Sorry {{userForm.age.$viewValue}} years old are not Allowed.</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex-gt-sm="60">
+                            <label>Height</label>
+                            <input required type="number" step="any" name="Height" ng-model="user.height" min="40" max="300" placeholder="150" />
+                            <div ng-if="userForm.height.$dirty" ng-messages="userForm.height.$error" role="alert" multiple>
+                                <div ng-message="required">Height is Required.</div>
+                                <div ng-message="min">Only Above 40 cm are allowed.</div>
+                                <div ng-message="max">Sorry {{userForm.age.$viewValue}} cm are not Allowed.</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex-gt-sm="60">
+                            <label>Weight</label>
+                            <input required type="number" step="any" name="Weight" ng-model="user.weight" min="20" max="400" placeholder="50" />
+                            <div ng-if="userForm.weight.$dirty" ng-messages="userForm.weight.$error" role="alert" multiple>
+                                <div ng-message="required">Weight is Required.</div>
+                                <div ng-message="min">Only Above 20 kg are allowed.</div>
+                                <div ng-message="max">Sorry {{userForm.weight.$viewValue}} kg old are not Allowed.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" layout-sm="column">
+                        <md-input-container flex-gt-sm="">
+                            <label>Email</label>
+                            <input required type="email" name="Email" ng-model="user.email" ng-pattern="/^[_a-z0-9-+]+(\.[_a-z0-9-+]+)*@@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/" placeholder="someone@example.com" />
+                            <div ng-if="userForm.email.$dirty" ng-messages="userForm.email.$error" role="alert">
+                                <div ng-message="required" class="my-message">Email Address is Required.</div>
+                                <div ng-message="pattern" class="my-message">Enter Correct Email Address. </div>
+                                <div ng-message="email" class="my-message">Enter Correct Email Address. </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" layout-sm="column">
+                        <md-input-container flex-gt-sm="">
+                            <label>Username</label>
+                            <input required type="text" name="username" ng-model="user.username" placeholder="Username" />
+                            <div ng-if="userForm.username.$dirty" ng-messages="userForm.username.$error" role="alert">
+                                <div ng-message="required" class="my-message">Username is Required.</div>
+                                <div ng-message="pattern" class="my-message">Enter Correct Username. </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" layout-sm="column">
+                        <md-input-container flex-gt-sm="">
+                            <label>New Password</label>
+                            <input name="Password" ng-model="user.password" type="password" minlength="8" maxlength="100" ng-pattern="/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/" required placeholder="********">
+                            <div ng-if="userForm.password.$dirty" ng-messages="userForm.password.$error" role="alert" multiple>
+                                <div ng-message="required">Password is Required.</div>
+                                <div ng-message="pattern">Password should contain at least one number, one special character and one uppercase character.</div>
+                                <div ng-message="minlength">Password should be greater than 9 letters.</div>
+                                <div ng-message="maxlength">Password Can't be more than 100 letters.</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex-gt-sm="">
+                            <label>Confirm Password</label>
+                            <input name="confmPassword" ng-model="user.confmPassword" type="password" minlength="8" maxlength="100" ng-pattern="/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/" required compare-to="user.password" placeholder="********">
+                            <div ng-if="userForm.confmPassword.$dirty" ng-messages="userForm.confmPassword.$error" role="alert">
+                                <div ng-message="required">Confirm Password is Required.</div>
+                                <div ng-message="compareTo">Password Doesn't Match.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <md-button class="md-raised md-primary" style="width:100%; margin: 0px 0px;" type="submit" ng-disabled="userForm.$invalid" name="submit">Submit</md-button>
+                    <md-button class="md-raised md-primary" href="/login/index" style="width:100%; margin: 15px 0px 0px 0px;">Login</md-button>
+                </form>
+            </div>
+        </md-content>
+    </div>
+    <!-- partial -->
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-route.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-aria.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-messages.min.js'></script>
+    <script src='https://cdn.gitcdn.xyz/cdn/angular/bower-material/v1.0.0-rc3/angular-material.js'></script>
+    <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-114/assets-cache.js'></script>
+    <script src="~/js/script.js"></script>
+
+</body>
+</html>
+
+

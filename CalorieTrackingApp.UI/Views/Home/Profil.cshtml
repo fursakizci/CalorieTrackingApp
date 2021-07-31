@@ -1,0 +1,148 @@
+﻿@model Tuple<List<int>, List<string>>
+
+@{
+    var targetData = Convert.ToInt32(ViewData["targetCalorie"]);
+
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+    <!-- The Grid -->
+    <div class="w3-row-padding">
+
+
+        <!-- Left Column -->
+        <div class="w3-third">
+
+            <div class="w3-white w3-text-grey w3-card-4" style="margin-top:10px">
+                <div class="w3-display-container">
+                    <img src="~/images/Gastronot.jpg" style="width:100%" alt="Avatar">
+                    <!--<div class="w3-display-bottomleft w3-container w3-text-black">
+                        <h2 class="w3-text-teal"><b>Ad Soyad</b></h2>f
+                    </div>--->
+                </div>
+                <div class="w3-container">
+                    @*<p><i class="fa-fw w3-margin-right w3-text-teal w3-hover-text-red w3-right"><u>edit profile</u></i></p>*@
+                    <p><i class="fa fa-id-card fa-fw w3-margin-right w3-large w3-text-teal"></i>@ViewData["username"]</p>
+                    <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-teal"></i>@ViewData["email"]</p>
+                    <p><i class="fa fa-male fa-fw w3-margin-right w3-large w3-text-teal"></i>@ViewData["height"]</p>
+                    <p><i class="fa fa-hourglass fa-fw w3-margin-right w3-large w3-text-teal"></i>@ViewData["weight"]</p>
+                </div>
+            </div><br>
+
+            <!-- End Left Column -->
+        </div>
+
+        <!-- Right Column -->
+        <div class="w3-twothird">
+            <br>
+            <div class="w3-container ">
+                <div class="w3-panel w3-teal w3-round-xlarge">
+                    <h5 class="w3-opacity">Target Calories: @ViewData["targetCalorie"] <a href="~/home/CalorieCalculator" class=" w3-button w3-circle w3-white w3-right w3-margin-bottom">+</a></h5>
+                </div>
+                <div class="w3-light-grey w3-round-xlarge">
+
+                    <div class="w3-container w3-card w3-white w3-margin-bottom">
+                        <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-cutlery fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>Calorie Intake History</h2>
+
+
+                        <div class="w3-container">
+                            <!--<h5 class="w3-text-grey"><i class="fa fa-plus-circle fa-fw w3-margin-right w3-large w3-text-teal"></i><b><u>Öğün Ekle</u></b></h5></p>-->
+                            <hr>
+
+                            <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+
+                            @*@Convert.ToDateTime(item.DateTime).ToString("dd/MM/yyyy")*@
+                            @*for (int i = dictSummary.Count - 1; i >= 0; i--) {
+                                var item = dictSummary.ElementAt(i);
+                                var itemKey = item.Key;
+                                var itemValue = item.Value;
+                                }*@
+                            @for (int i = Model.Item1.Count - 1; i >= 2; i--)
+                            {
+                                <h5 class="w3-opacity">@Convert.ToDateTime(Model.Item2.ElementAt(i)).ToString("dd/MM/yyyy") - (@(targetData - Model.Item1.ElementAt(i)) kcal)</h5>
+                                <div class="w3-light-grey w3-round-xlarge w3-small">
+                                    @{
+                                        var bar = (100 * Model.Item1.ElementAt(i) / targetData);
+                                        if (targetData == 1)
+                                            bar = 1;
+
+                                        if (bar > 100)
+                                        {
+                                            bar = 100;
+                                        }
+                                    }
+                                    <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:@bar%">@bar%</div>
+                                </div>
+                            }
+                            @*<h5 class="w3-opacity">GG/AA/YYYY - 300 kcal</h5>
+                                <div class="w3-light-grey w3-round-xlarge w3-small">
+                                    <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:88%">88%</div>
+                                </div>
+                                <h5 class="w3-opacity">GG/AA/YYYY - 350 kcal</h5>
+                                <div class="w3-light-grey w3-round-xlarge w3-small">
+                                    <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:87%">87%</div>
+                                </div>
+                                <h5 class="w3-opacity">GG/AA/YYYY - 400 kcal</h5>
+                                <div class="w3-light-grey w3-round-xlarge w3-small">
+                                    <div class="w3-container w3-center w3-round-xlarge w3-teal" style="width:100%">100%</div>
+                                </div>*@
+                            <hr>
+                        </div>
+                        <!--<div class="w3-container">
+                        <p><h5 class="w3-text-grey"><i class="fa fa-percent fa-fw w3-margin-right w3-large w3-text-teal"></i><b>Günlük kalori</b></h5></p>
+                        -->
+                        <br>
+                    </div>
+                </div>
+
+
+
+                <!-- End Right Column -->
+            </div>
+
+            <!-- End Grid -->
+        </div>
+
+        <!-- End Page Container -->
+    </div>
+</div>
+
+<script>
+        //1, 2, 3, 4, 5, 6, 7
+        var xValues = [];
+        var datas = [];
+        @foreach(var item in Model.Item1)
+            {
+                @:datas.push(@item);
+
+            }
+        @foreach(var item in Model.Item2)
+            {
+                @:xValues.push('@Convert.ToDateTime(item).ToString("dd/MM/yyyy")');
+            }
+
+        new Chart("myChart", {
+            type: "line",
+            data: {
+                labels: xValues,
+                datasets: [{
+                    data: datas,
+                    borderColor: "red",
+                    fill: false
+                }, {
+                    data: [1600, 1600, 1600, 1600, 1600, 1600, 1600],
+                    borderColor: "green",
+                    fill: false
+                }]
+            },
+            options: {
+                legend: { display: false }
+            }
+        });</script>

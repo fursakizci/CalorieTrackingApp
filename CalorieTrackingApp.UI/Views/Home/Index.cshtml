@@ -1,0 +1,254 @@
+﻿@model CalorieTrackingApp.UI.Models.ProfileModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title></title>
+</head>
+<body>
+    <div class="w3-content w3-margin-top" style="max-width:1400px;">
+
+        <!-- The Grid -->
+        <div class="w3-row-padding">
+
+
+            <!-- Left Column -->
+            <div class="w3-quarter">
+
+                <div class="w3-white w3-text-grey w3-card-4">
+                    <div class="w3-display-container">
+                        <img src="~/images/default-profile-picture1.jpg" style="width:100%" alt="Avatar">
+                        <!--<div class="w3-display-bottomleft w3-container w3-text-black">
+                            <h2 class="w3-text-orange"><b>Ad Soyad</b></h2>
+                        </div>--->
+                    </div>
+                    <div class="w3-container">
+                        <!--<p><i class="fa-fw w3-margin-right w3-text-orange w3-hover-text-red w3-right"><u>edit profile</u></i></p>-->
+                        <p><i class="fa fa-id-card fa-fw w3-margin-right w3-large w3-text-orange"></i>@ViewData["username"]</p>
+                        <p><i class="fa fa-envelope fa-fw w3-margin-right w3-large w3-text-orange"></i>@ViewData["email"]</p>
+                        <p><i class="fa fa-male fa-fw w3-margin-right w3-large w3-text-orange"></i>@ViewData["height"]</p>
+                        <p><i class="fa fa-hourglass fa-fw w3-margin-right w3-large w3-text-orange"></i>@ViewData["weight"]</p>
+                        <a><i class="fa fa-bullseye fa-fw w3-margin-right w3-large w3-text-orange"></i>@ViewData["targetCalorie"] kcal</a>
+                        <!--<a><i class="fa-fw w3-margin-right w3-text-orange w3-hover-text-red w3-right"><u>yeni hedef</u></i></a>-->
+                        <br>
+                        <hr>
+                        <br>
+                    </div>
+                </div><br>
+
+                <!-- End Left Column -->
+            </div>
+
+            <!-- Right Column -->
+            <div class="w3-threequarter w3-margin-top" id="rig">
+                <div></div>
+                <br>
+                <br />
+                
+                    @*<label class="w3-text-red" id="added_meal_label"></label>*@
+                    <form asp-action="index" asp-controller="home" method="post">
+                        <input name="DateTime" type="date" id="calendar">
+                        <br />
+                        <br />
+
+                        @*<label id="label1">Add meal: </label>*@
+                        <select name="FoodId" id="foods">
+                            @foreach (var item in Model.Foods)
+                            {
+                                <option id="foodid" value="@item.Id">@item.FoodName</option>
+                            }
+                        </select>
+                        <label id="label2"> as </label>
+                        <select name="MealId" id="meals">
+                            <option value="1">Breakfast</option>
+                            <option value="2">Lunch</option>
+                            <option value="3">Dinner</option>
+                            <option value="4">Snack</option>
+                        </select>
+                        <button id="label1" class="btn btn-primary">Add Meal</button>
+                    </form>
+                    <br />
+                @*<label id="add_meal" class="w3-hover-text-blue">
+                    <b><u id="add_meal_id">add meal</u></b>
+                </label>*@
+                <div class="table">
+                    <table class="table table-hover">
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Food Name
+                                </th>
+                                <th>
+                                    Calorie
+                                </th>
+                                <th>
+                                    Meal
+                                </th>
+                                <th>
+                                    Time
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.FoodMealDtos)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.FoodName
+                                    </td>
+                                    <td>
+                                        @item.Calorie
+                                    </td>
+                                    <td>
+                                        @switch (item.Period)
+                                        {
+                                            case "1":
+                                                @: Breakfast
+                                                break;
+                                            case "2":
+                                                @: Lunch
+                                                break;
+                                            case "3":
+                                                @: Dinner
+                                                break;
+                                            case "4":
+                                                @: Snack
+                                                break;
+                                        }
+                                    </td>
+                                    <td>
+                                        @Convert.ToDateTime(item.DateTime).ToString("dd/MM/yyyy")
+                                    </td>
+                                    <td>  
+                                    <a asp-action="DeleteMeal" asp-route-id="@item.Id" class="text-danger ml-1" onclick="return confirm('Are you sure to delete this record?')"><i class="fa fa-trash-alt fa-lg"></i></a></td>
+
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+
+            <!-- End Right Column -->
+        </div>
+
+        <!-- End Grid -->
+    </div>
+</body>
+</html>
+<script>
+    var rig = document.getElementById("rig");
+                                    var meal_label_str;
+                                    var added_meal_label = document.getElementById("added_meal_label");
+
+                                    var foods = document.getElementById("foods");
+
+                                    var meals = document.getElementById("meals");
+                                    var label1 = document.getElementById("label1");
+                                    var label2 = document.getElementById("label2");
+                                    var calendar = document.getElementById("calendar");
+                                    let today = new Date().toISOString().slice(0, 10);
+                                    calendar.value = today;
+    var add_meal = document.getElementById("add_meal");
+                                    add_meal.addEventListener("click",
+        function () { firstLineClick(); }, false);
+
+    function firstLineClick()
+                                    {
+
+                                        var str;
+                                        str = " " + foods.options[foods.selectedIndex].text + " (50 kcal)" + " added as " + meals.options[meals.selectedIndex].text + " -> " + calendar.value;
+
+                                        /*else {
+                                            str = " " + new_foods.options[new_foods.selectedIndex].text + " (50 kcal)" + " added as " + new_meals.options[new_meals.selectedIndex].text + " -> " + calendar.value;
+                                        }*/
+                                        /*else {
+                                            str = " " + foods.options[foods.selectedIndex].text + " (50 kcal)" + " added as " + meals.options[meals.selectedIndex].text + " -> " + calendar.value;
+                                        }*/
+                                        var new_added_meal_label = added_meal_label.cloneNode(true);
+                                        rig.appendChild(new_added_meal_label);
+                                        new_added_meal_label.innerHTML = str;
+                                        var brac = document.createElement("br");
+                                        rig.appendChild(brac);
+                                        //var new_label1 = label1.cloneNode(true);
+                                        //rig.appendChild(new_label1);
+                                        var new_foods = foods.cloneNode(true);
+                                        rig.appendChild(new_foods);
+                                        var new_label2 = label2.cloneNode(true);
+                                        rig.appendChild(new_label2);
+                                        var new_meals = meals.cloneNode(true);
+                                        rig.appendChild(new_meals);
+                                        //var new_add_meal = add_meal.cloneNode(true);
+                                        //rig.appendChild(new_add_meal);
+                                        new_add_meal.addEventListener("click",
+                                            function ()
+            {
+                                            str = " " + new_foods.options[new_foods.selectedIndex].text + " (50 kcal)" + " added as " + new_meals.options[new_meals.selectedIndex].text + " -> " + calendar.value;
+                                            var new_added_meal_label = added_meal_label.cloneNode(true);
+                                            rig.appendChild(new_added_meal_label);
+                                            new_added_meal_label.innerHTML = str;
+                                            otherLinesClick();
+                                        }, false);
+
+                                    }
+
+                                    function otherLinesClick()
+                                    {
+
+
+                                        var brac = document.createElement("br");
+                                        rig.appendChild(brac);
+                                        //var new_label1 = label1.cloneNode(true);
+                                        //rig.appendChild(new_label1);
+                                        var new_foods = foods.cloneNode(true);
+                                        rig.appendChild(new_foods);
+                                        var new_label2 = label2.cloneNode(true);
+                                        rig.appendChild(new_label2);
+                                        var new_meals = meals.cloneNode(true);
+                                        rig.appendChild(new_meals);
+                                        //var new_add_meal = add_meal.cloneNode(true);
+                                        //rig.appendChild(new_add_meal);
+                                        new_add_meal.addEventListener("click",
+                                            function ()
+                                            {
+                                            var str;
+                                            str = " " + new_foods.options[new_foods.selectedIndex].text + " (50 kcal)" + " added as " + new_meals.options[new_meals.selectedIndex].text + " -> " + calendar.value;
+                                            var new_added_meal_label = added_meal_label.cloneNode(true);
+                                            rig.appendChild(new_added_meal_label);
+                                            new_added_meal_label.innerHTML = str;
+                                            otherLinesClick();
+                                        }, false);
+                                    }
+
+    $(document).ready(function ()
+    {
+
+        $('#add_meal_id').click(function ()
+        {
+                                            debugger;
+                                            //var foodid = $("#foods").children("option:selected").val();
+                                            var foodid = $('#foods').val();
+                                            var mealid = $('#meals').val();
+                                            var datetime = $('#calendar').val();
+            
+            $.ajax({
+                                                type: "POST",
+                url: "/home/FoodMeal",
+                data: { foodid, mealid, datetime },
+            });
+        });
+    });
+</script>
+
+
